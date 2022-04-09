@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <title>Movie Database</title>
+</head>
+
+<body>
+    <div id="mainMovie">
+        <h1>My Movie Database:</h1>
+        <button type='button' id="addButton">Add movie</button>
+        <table id="movieList">
+            <tr>
+                <th>Title</th>
+                <th>Rating</th>
+                <th>Score</th>
+                <th>Formats Owned:</th>
+            </tr>
+        </table>
+    </div>
+    <div id="newMovie">
+        <form>
+            <h1 id="formHeader"></h1>
+            <label for="movieTitle">Movie Title:</label>
+            <input type="text" id="movieTitle" name="movieTitle">
+            <div id="titleError" class="validationError"></div>
+            <label for="movieRating">Movie Rating:</label>
+            <input list="movieRatingList" type='text' id="movieRating" name="movieRating">
+            <datalist id="movieRatingList">
+                <option value="G">
+                <option value="PG">
+                <option value="PG-13">
+                <option value="R">
+            </datalist>
+            <div id="mrError" class="validationError"></div>
+            <label for="userRating">Score:</label>
+            <input list="userRatingList" type='text' id="userRating" name="userRating">
+            <datalist id="userRatingList">
+                <option value="1">
+                <option value="2">
+                <option value="3">
+                <option value="4">
+                <option value="5">
+            </datalist>
+            <div id="urError" class="validationError"></div>
+            <label for="movieYear">Year Produced:</label>
+            <input type="number" id="movieYear" name="movieYear">
+            <div id="yearError" class="validationError"></div>
+            <label for="genre">Genre:</label>
+            <input type="radio" id="action" name="genre" value="action">
+            <label for="action">Action/Adventure</label>
+            <input type="radio" id="drama" name="genre" value="drama">
+            <label for="drama">Drama</label>
+            <input type="radio" id="comedy" name="genre" value="comedy">
+            <label for="comedy">Comedy</label>
+            <input type="radio" id="romance" name="genre" value="romance">
+            <label for="romance">Romance</label>
+            <input type="radio" id="scifi" name="genre" value="scifi">
+            <label for="scifi">Sci-Fi/Fantasy</label>
+            <div id="genreError" class="validationError"></div>
+            <p>Formats Owned:</p>
+            <input type="checkbox" id="Bluray" name="Bluray" value="Bluray">
+            <label for="Bluray">Bluray</label>
+            <input type="checkbox" id="DVD" name="DVD" value="DVD">
+            <label for="DVD">DVD</label>
+            <input type="checkbox" id="Streaming" name="Streaming" value="Streaming">
+            <label for="Streaming">Streaming</label>
+            <button type='button' id="submitMovie">Submit</button>
+            <button type='button' id="cancel">Cancel</button>
+        </form>
+    </div>
+</body>
+<script src="/scripts/moviedb.js"></script>
+
+</html>
