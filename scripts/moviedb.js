@@ -160,18 +160,65 @@ function editMovie(movieId) {
 }
 
 function entryValidation() {
+    let verified = true
     if (document.getElementById("movieTitle").value === "") {
-        document.getElementById("titleError").innerHTML = "Field Required"
+        document.getElementById("titleError").innerHTML = "Field Required."
+        verified = false
     }
+
     let mvRating = document.getElementById("movieRating").value
     if (mvRating === "G" || mvRating === "PG" || mvRating === "PG-13" || mvRating === "R") {
         document.getElementById("mrError").innerHTML = ""
     } else if (mvRating === "") {
-        document.getElementById("mrError").innerHTML = "Field Required"
+        document.getElementById("mrError").innerHTML = "Field Required."
+        verified = false
     } else {
-        document.getElementById("mrError").innerHTML = "Invalid Entry"
+        document.getElementById("mrError").innerHTML = "Invalid Entry."
+        verified = false
+        
     }
 
+    let usRating = document.getElementById("userRating").value
+    if (!isNaN(usRating)) {
+        if (usRating < 0 && usRating > 6) {
+            document.getElementById("urError").innerHTML = "Enter a value between 1 and 5."
+            verified = false            
+        }
+    } else if (usRating === "") {
+        document.getElementById("urError").innerHTML = "Field Required."
+        verified = false
+    } else {
+        document.getElementById("urError").innerHTML = "Entry is not a number."
+        verified = false
+    }
+
+    let movieYear = document.getElementById("movieYear").value
+    if (!isNaN(movieYear)) {
+        if (!movieYear.length === 4) {
+            document.getElementById("yearError").innerHTML = "Entry must have exactly 4 digits."
+            verified = false
+        }
+    } else if (movieYear === "") {
+        document.getElementById("yearError").innerHTML = "Field Required."
+        verified = false
+    } else {
+        document.getElementById("yearError").innerHTML = "Entry is not a number."
+        verified = false
+    }
+
+    let movieGenres = document.querySelectorAll('input[name="genre"]')
+    let genreCheck = false
+    for (theGenre of movieGenres) {
+        if (theGenre.checked === true) {
+            genreCheck = true
+        } 
+    }
+    if (!genreCheck) {
+        document.getElementById("genreError").innerHTML = "Must select a genre."
+        verified = false
+    }
+
+    
 }
 
 function EditMovieSubmit(editingMovie) {
