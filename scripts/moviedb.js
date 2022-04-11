@@ -22,6 +22,7 @@ class Movie {
 
 function cancelFunc() {
     cleanUp()
+    cleanUpValidation()
 
     document.getElementById("mainMovie").style.display = "block"
     document.getElementById("newMovie").style.display = "none"
@@ -45,37 +46,42 @@ function addMovie() {
 }
 
 function addMovieSubmit() {
-    let newId = movieId++
-    let movieTitle = document.getElementById("movieTitle").value
-    let movieRating = document.getElementById("movieRating").value
-    let userRating = document.getElementById("userRating").value
-    let movieYear = document.getElementById("movieYear").value
-    let movieGenres = document.querySelectorAll('input[name="genre"]')
-    for (genre of movieGenres) {
-        if (genre.checked === true) {
-            var movieGenre = genre.value
+    cleanUpValidation()
+    if (entryValidation()) {
+        let newId = movieId++
+        let movieTitle = document.getElementById("movieTitle").value
+        let movieRating = document.getElementById("movieRating").value
+        let userRating = document.getElementById("userRating").value
+        let movieYear = document.getElementById("movieYear").value
+        let movieGenres = document.querySelectorAll('input[name="genre"]')
+        for (genre of movieGenres) {
+            if (genre.checked === true) {
+                var movieGenre = genre.value
+            }
         }
-    }
-    let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Streaming")]
-    let availableFormats = []
-    for (each of formats) {
-        if (each.checked === true) {
-            availableFormats.push(each.value)
+        let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Streaming")]
+        let availableFormats = []
+        let formatQuantity = 0
+        for (each of formats) {
+            if (each.checked === true) {
+                formatQuantity++
+                availableFormats.push(each.value)
+            }
         }
+        if (availableFormats.length === 3) {
+            availableFormats = "All"
+        }
+
+        let newEntry = new Movie(newId, movieTitle, movieRating, userRating, movieYear, movieGenre, availableFormats)
+
+        movieList.push([newId, newEntry])
+
+        addMovieToList(newEntry, formatQuantity)
+        cleanUp()
+
+        document.getElementById("mainMovie").style.display = "block"
+        document.getElementById("newMovie").style.display = "none"
     }
-    if (availableFormats.length === 3) {
-        availableFormats = "All"
-    }
-
-    let newEntry = new Movie(newId, movieTitle, movieRating, userRating, movieYear, movieGenre, availableFormats)
-
-    movieList.push([newId, newEntry])
-
-    addMovieToList(newEntry)
-    cleanUp()
-
-    document.getElementById("mainMovie").style.display = "block"
-    document.getElementById("newMovie").style.display = "none"
 }
 
 function cleanUp() {
@@ -92,7 +98,16 @@ function cleanUp() {
     document.getElementById("Streaming").checked = false
 }
 
-function addMovieToList(theEntry) {
+function cleanUpValidation() {
+    document.getElementById("titleError").innerHTML = ""
+    document.getElementById("mrError").innerHTML = ""
+    document.getElementById("urError").innerHTML = ""
+    document.getElementById("yearError").innerHTML = ""
+    document.getElementById("genreError").innerHTML = ""
+    document.getElementById("formatError").innerHTML = ""
+}
+
+function addMovieToList(theEntry, fQuant) {
     let movieTable = document.getElementById("movieList")
     let newRow = document.createElement("tr")
     newRow.id = "row" + theEntry.id
@@ -103,25 +118,33 @@ function addMovieToList(theEntry) {
     let newUsRating = document.createElement("td")
     newUsRating.innerHTML = theEntry.usRating
     let newFormats = document.createElement("td")
-    newFormats.innerHTML = theEntry.format
+    console.log(fQuant)
+    if (fQuant == 2) {
+        newFormats.innerHTML = `${theEntry.format[0]} & ${theEntry.format[1]}`
+    } else {
+        newFormats.innerHTML = theEntry.format
+    }
 
     newRow.appendChild(newTitle)
     newRow.appendChild(newMvRating)
     newRow.appendChild(newUsRating)
     newRow.appendChild(newFormats)
 
-
+    let editTd = document.createElement("td")
     let editButton = document.createElement("button")
     editButton.type = "button"
     editButton.innerHTML = "Edit"
     editButton.onclick = function () { editMovie(theEntry.id) }
-    newRow.appendChild(editButton)
+    editTd.appendChild(editButton)
+    newRow.appendChild(editTd)
 
+    let deleteTd = document.createElement("td")
     let deleteButton = document.createElement("button")
     deleteButton.type = "button"
     deleteButton.innerHTML = "Delete"
     deleteButton.onclick = function () { deleteMovie(theEntry.id) }
-    newRow.appendChild(deleteButton)
+    deleteTd.appendChild(deleteButton)
+    newRow.appendChild(deleteTd)
 
     movieTable.appendChild(newRow)
 }
@@ -175,18 +198,19 @@ function entryValidation() {
     } else {
         document.getElementById("mrError").innerHTML = "Invalid Entry."
         verified = false
-        
+
     }
 
     let usRating = document.getElementById("userRating").value
-    if (!isNaN(usRating)) {
-        if (usRating < 0 && usRating > 6) {
+    if (!(isNaN(usRating))) {
+        if (usRating > 5 || usRating < 0) {
+
             document.getElementById("urError").innerHTML = "Enter a value between 1 and 5."
-            verified = false            
+            verified = false
+        } else if (usRating === "") {
+            document.getElementById("urError").innerHTML = "Field Required."
+            verified = false
         }
-    } else if (usRating === "") {
-        document.getElementById("urError").innerHTML = "Field Required."
-        verified = false
     } else {
         document.getElementById("urError").innerHTML = "Entry is not a number."
         verified = false
@@ -194,7 +218,7 @@ function entryValidation() {
 
     let movieYear = document.getElementById("movieYear").value
     if (!isNaN(movieYear)) {
-        if (!movieYear.length === 4) {
+        if (!(movieYear.length === 4)) {
             document.getElementById("yearError").innerHTML = "Entry must have exactly 4 digits."
             verified = false
         }
@@ -211,49 +235,70 @@ function entryValidation() {
     for (theGenre of movieGenres) {
         if (theGenre.checked === true) {
             genreCheck = true
-        } 
+        }
     }
     if (!genreCheck) {
         document.getElementById("genreError").innerHTML = "Must select a genre."
         verified = false
     }
 
-    
+    let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Streaming")]
+    let formatCheck = false
+    for (each of formats) {
+        if (each.checked === true) {
+            formatCheck = true
+        }
+    }
+    if (!formatCheck) {
+        document.getElementById("formatError").innerHTML = "Must select at least one format owned."
+        verified = false
+    }
+
+    return verified
 }
 
 function EditMovieSubmit(editingMovie) {
-    editingMovie.title = document.getElementById("movieTitle").value
-    editingMovie.mvRating = document.getElementById("movieRating").value
-    editingMovie.usRating = document.getElementById("userRating").value
-    editingMovie.year = document.getElementById("movieYear").value
-    let movieGenres = document.querySelectorAll('input[name="genre"]')
-    for (theGenre of movieGenres) {
-        if (theGenre.checked === true) {
-            editingMovie.genre = theGenre.value
+    cleanUpValidation()
+    if (entryValidation()) {
+        editingMovie.title = document.getElementById("movieTitle").value
+        editingMovie.mvRating = document.getElementById("movieRating").value
+        editingMovie.usRating = document.getElementById("userRating").value
+        editingMovie.year = document.getElementById("movieYear").value
+        let movieGenres = document.querySelectorAll('input[name="genre"]')
+        for (theGenre of movieGenres) {
+            if (theGenre.checked === true) {
+                editingMovie.genre = theGenre.value
+            }
         }
-    }
-    let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Streaming")]
-    let availableFormats = []
-    for (each of formats) {
-        if (each.checked === true) {
-            availableFormats.push(each.value)
+        let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Streaming")]
+        let availableFormats = []
+        let formatQuantity = 0
+        for (each of formats) {
+            if (each.checked === true) {
+                formatQuantity++
+                availableFormats.push(each.value)
+            }
         }
+        if (availableFormats.length === 3) {
+            availableFormats = "All"
+        }
+        editingMovie.format = availableFormats
+
+        let editingRow = document.getElementById("row" + editingMovie.id)
+        editingRow.childNodes[0].innerHTML = document.getElementById("movieTitle").value
+        editingRow.childNodes[1].innerHTML = document.getElementById("movieRating").value
+        editingRow.childNodes[2].innerHTML = document.getElementById("userRating").value
+        if (formatQuantity == 2) {
+            editingRow.childNodes[3].innerHTML = `${editingMovie.format[0]} & ${editingMovie.format[1]}`
+        } else {
+            editingRow.childNodes[3].innerHTML = editingMovie.format
+        }
+
+        cleanUp()
+
+        document.getElementById("mainMovie").style.display = "block"
+        document.getElementById("newMovie").style.display = "none"
     }
-    if (availableFormats.length === 3) {
-        availableFormats = "All"
-    }
-    editingMovie.format = availableFormats
-
-    let editingRow = document.getElementById("row" + editingMovie.id)
-    editingRow.childNodes[0].innerHTML = document.getElementById("movieTitle").value
-    editingRow.childNodes[1].innerHTML = document.getElementById("movieRating").value
-    editingRow.childNodes[2].innerHTML = document.getElementById("userRating").value
-    editingRow.childNodes[3].innerHTML = editingMovie.format
-
-    cleanUp()
-
-    document.getElementById("mainMovie").style.display = "block"
-    document.getElementById("newMovie").style.display = "none"
 }
 
 function deleteMovie(movieId) {
@@ -294,4 +339,4 @@ function initializeList() {
 
 initializeList()
 
-//WORK ON VALIDATION, STYLING, EVENTUALLY CONVERT TO MVC
+//STYLING, EVENTUALLY CONVERT TO MVC

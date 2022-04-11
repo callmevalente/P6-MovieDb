@@ -19,58 +19,77 @@
                 <th>Rating</th>
                 <th>Score</th>
                 <th>Formats Owned:</th>
+                <th></th>
+                <th></th>
             </tr>
         </table>
     </div>
     <div id="newMovie">
         <form>
             <h1 id="formHeader"></h1>
-            <label for="movieTitle">Movie Title:</label>
-            <input type="text" id="movieTitle" name="movieTitle">
-            <div id="titleError" class="validationError"></div>
-            <label for="movieRating">Movie Rating:</label>
-            <input list="movieRatingList" type='text' id="movieRating" name="movieRating">
-            <datalist id="movieRatingList">
-                <option value="G">
-                <option value="PG">
-                <option value="PG-13">
-                <option value="R">
-            </datalist>
-            <div id="mrError" class="validationError"></div>
-            <label for="userRating">Score:</label>
-            <input list="userRatingList" type='text' id="userRating" name="userRating">
-            <datalist id="userRatingList">
-                <option value="1">
-                <option value="2">
-                <option value="3">
-                <option value="4">
-                <option value="5">
-            </datalist>
-            <div id="urError" class="validationError"></div>
-            <label for="movieYear">Year Produced:</label>
-            <input type="number" id="movieYear" name="movieYear">
-            <div id="yearError" class="validationError"></div>
-            <label for="genre">Genre:</label>
-            <input type="radio" id="action" name="genre" value="action">
-            <label for="action">Action/Adventure</label>
-            <input type="radio" id="drama" name="genre" value="drama">
-            <label for="drama">Drama</label>
-            <input type="radio" id="comedy" name="genre" value="comedy">
-            <label for="comedy">Comedy</label>
-            <input type="radio" id="romance" name="genre" value="romance">
-            <label for="romance">Romance</label>
-            <input type="radio" id="scifi" name="genre" value="scifi">
-            <label for="scifi">Sci-Fi/Fantasy</label>
-            <div id="genreError" class="validationError"></div>
-            <p>Formats Owned:</p>
-            <input type="checkbox" id="Bluray" name="Bluray" value="Bluray">
-            <label for="Bluray">Bluray</label>
-            <input type="checkbox" id="DVD" name="DVD" value="DVD">
-            <label for="DVD">DVD</label>
-            <input type="checkbox" id="Streaming" name="Streaming" value="Streaming">
-            <label for="Streaming">Streaming</label>
-            <button type='button' id="submitMovie">Submit</button>
-            <button type='button' id="cancel">Cancel</button>
+            <fieldset>
+                <div>
+                    <label for="movieTitle" class="heads">Movie Title:</label>
+                    <input type="text" id="movieTitle" name="movieTitle">
+                    <p id="titleError" class="validationError"></p>
+                </div>
+                <div>
+                    <label for="movieRating" class="heads">Movie Rating:</label>
+                    <select id="movieRating" name="movieRating">
+                        <option value="">Select</option>
+                        <option value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13">PG-13</option>
+                        <option value="R">R</option>
+                    </select>
+                    <p id="mrError" class="validationError"></p>
+                </div>
+                <div>
+                    <label for="userRating" class="heads">Score:</label>
+                    <select id="userRating" name="userRating">
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <p id="urError" class="validationError"></p>
+                </div>
+                <div>
+                    <label for="movieYear" class="heads">Year Produced:</label>
+                    <input type="number" id="movieYear" name="movieYear">
+                    <p id="yearError" class="validationError"></p>
+                </div>
+                <div>
+                    <label for="genre" class="heads">Genre:</label>
+                    <input type="radio" id="action" name="genre" value="action">
+                    <label for="action">Action/Adventure</label>
+                    <input type="radio" id="drama" name="genre" value="drama">
+                    <label for="drama">Drama</label>
+                    <input type="radio" id="comedy" name="genre" value="comedy">
+                    <label for="comedy">Comedy</label>
+                    <input type="radio" id="romance" name="genre" value="romance">
+                    <label for="romance">Romance</label>
+                    <input type="radio" id="scifi" name="genre" value="scifi">
+                    <label for="scifi">Sci-Fi/Fantasy</label>
+                    <p id="genreError" class="validationError"></p>
+                </div>
+                <div>
+                    <label class="heads">Formats Owned:</label>
+                    <input type="checkbox" id="Bluray" name="Bluray" value="Bluray">
+                    <label for="Bluray">Bluray</label>
+                    <input type="checkbox" id="DVD" name="DVD" value="DVD">
+                    <label for="DVD">DVD</label>
+                    <input type="checkbox" id="Streaming" name="Streaming" value="Streaming">
+                    <label for="Streaming">Streaming</label>
+                    <p id="formatError" class="validationError"></p>
+                </div>
+                <div class="formButtons">
+                    <button type='button' id="submitMovie">Submit</button>
+                    <button type='button' id="cancel">Cancel</button>
+                </div>
+            </fieldset>
         </form>
     </div>
 </body>

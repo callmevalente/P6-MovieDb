@@ -16,16 +16,44 @@ body {
     padding: 50px;
 }
 
-table,
+h1 {
+    text-align: center;
+}
+
+#addButton {
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+tr {
+    height: 50px;
+}
+
+th {
+    font-size: x-large;
+}
+
 th,
 td {
-    border: 1px solid;
+    text-align: center;
+    padding: 0px 30px;
 }
 
 #newMovie {
     display: none;
 }
 
-.ValidatiionError {
+.heads {
+    font-size: x-large;
+
+}
+
+input,
+select {
+    font-size: large;
+}
+
+.validationError {
     color: red;
 }
