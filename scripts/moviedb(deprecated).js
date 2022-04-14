@@ -151,7 +151,7 @@ function addMovieToList(theEntry, fQuant) {
 
 function editMovie(movieId) {
     document.getElementById("formHeader").innerHTML = "Edit movie:"
-    let editingMovie = getMovieById(movieId)
+    let editingMovie = updateMovie(movieId)
 
     document.getElementById("movieTitle").value = editingMovie.title
     document.getElementById("movieRating").value = editingMovie.mvRating
