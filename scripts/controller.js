@@ -123,7 +123,7 @@ function entryValidation() {
     }
 
     let movieYear = document.getElementById("movieYear").value
-    if (!isNaN(movieYear)) {
+    if (!isNaN(movieYear) && !(movieYear === "")) {
         if (!(movieYear.length === 4)) {
             document.getElementById("yearError").innerHTML = "Entry must have exactly 4 digits."
             verified = false
