@@ -35,7 +35,7 @@ function updateMovie(editingMovie) {
             editingMovie.genre = theGenre.value
         }
     }
-    let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Streaming")]
+    let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Digital")]
     let availableFormats = []
     let formatQuantity = 0
     for (each of formats) {

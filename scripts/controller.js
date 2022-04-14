@@ -23,7 +23,7 @@ function cleanUp() {
     }
     document.getElementById("Bluray").checked = false
     document.getElementById("DVD").checked = false
-    document.getElementById("Streaming").checked = false
+    document.getElementById("Digital").checked = false
 }
 
 function cleanUpValidation() {
@@ -60,6 +60,7 @@ function addMovieToList(theEntry, fQuant) {
     let editTd = document.createElement("td")
     let editButton = document.createElement("button")
     editButton.type = "button"
+    editButton.classList.add("editButton")
     editButton.innerHTML = "Edit"
     editButton.onclick = function () { editMovie(theEntry.id) }
     editTd.appendChild(editButton)
@@ -68,6 +69,7 @@ function addMovieToList(theEntry, fQuant) {
     let deleteTd = document.createElement("td")
     let deleteButton = document.createElement("button")
     deleteButton.type = "button"
+    deleteButton.classList.add("deleteButton")
     deleteButton.innerHTML = "Delete"
     deleteButton.onclick = function () { removeMovie(theEntry.id) }
     deleteTd.appendChild(deleteButton)
@@ -148,7 +150,7 @@ function entryValidation() {
         verified = false
     }
 
-    let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Streaming")]
+    let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Digital")]
     let formatCheck = false
     for (each of formats) {
         if (each.checked === true) {
@@ -186,7 +188,7 @@ function addMovieSubmit() {
                 var movieGenre = genre.value
             }
         }
-        let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Streaming")]
+        let formats = [document.getElementById("Bluray"), document.getElementById("DVD"), document.getElementById("Digital")]
         let availableFormats = []
         let formatQuantity = 0
         for (each of formats) {
@@ -227,7 +229,7 @@ function editMovie(movieId) {
     if (editingMovie.format === "All") {
         document.getElementById("Bluray").checked = true
         document.getElementById("DVD").checked = true
-        document.getElementById("Streaming").checked = true
+        document.getElementById("Digital").checked = true
     } else if (editingMovie.format.length === 2) {
         for (theFormat of editingMovie.format) {
             document.getElementById(theFormat).checked = true
@@ -274,7 +276,7 @@ function initializeList() {
     let movieTwo = createNewMovie("The Batman", "PG-13", "5", "2022", "action", "All")
     addMovieToList(movieTwo)
 
-    let movieThree = createNewMovie("Lovehard", "PG-13", "3", "2021", "comedy", "Streaming")
+    let movieThree = createNewMovie("Lovehard", "PG-13", "3", "2021", "comedy", "Digital")
     addMovieToList(movieThree)
 
     let movieFour = createNewMovie("Crazy Rich Asians", "PG-13", "3", "2018", "romance", "Bluray")

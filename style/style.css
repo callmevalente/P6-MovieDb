@@ -5,6 +5,7 @@ body {
     background-color: lightgray;
 }
 
+
 #mainMovie,
 #newMovie {
     background-color: white;
@@ -17,17 +18,53 @@ body {
 }
 
 h1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 4rem;
     text-align: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }
 
 #addButton {
     display: flex;
     align-items: center;
     margin: auto;
+    box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    background: linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
+    background-color: #ffc477;
+    border-radius: 6px;
+    border: 1px solid #eeb44f;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #cc9f52;
+}
+
+#addButton:hover {
+    background: linear-gradient(to bottom, #fb9e25 5%, #ffc477 100%);
+    background-color: #fb9e25;
+}
+
+#addButton:active {
+    position: relative;
+    top: 1px;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-family: 'Lato', sans-serif;
 }
 
 tr {
     height: 50px;
+    border-bottom: 1px solid black;
 }
 
 th {
@@ -38,15 +75,74 @@ th,
 td {
     text-align: center;
     padding: 0px 30px;
+    border-bottom: 2px solid black;
+
 }
+
+.editButton {
+    box-shadow: inset 0px 1px 0px 0px #a4e271;
+    background: linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+    background-color: #89c403;
+    border-radius: 6px;
+    border: 1px solid #74b807;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #528009;
+}
+
+.editButton:hover {
+    background: linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+    background-color: #77a809;
+}
+
+.editButton:active {
+    position: relative;
+    top: 1px;
+}
+
+.deleteButton {
+    box-shadow: inset 0px 1px 0px 0px #f7c5c0;
+    background: linear-gradient(to bottom, #fc8d83 5%, #e4685d 100%);
+    background-color: #fc8d83;
+    border-radius: 6px;
+    border: 1px solid #d83526;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #b23e35;
+}
+
+.deleteButton:hover {
+    background: linear-gradient(to bottom, #e4685d 5%, #fc8d83 100%);
+    background-color: #e4685d;
+}
+
+.deleteButton:active {
+    position: relative;
+    top: 1px;
+}
+
 
 #newMovie {
     display: none;
+    font-family: 'Lato', sans-serif;
 }
 
 .heads {
     font-size: x-large;
-
+    font-weight: bold;
+    margin-right: 5px;
 }
 
 input,
@@ -55,5 +151,69 @@ select {
 }
 
 .validationError {
+    display: inline-block;
+    margin-left: 10px;
     color: red;
+}
+
+.formButtons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+#submitMovie {
+    box-shadow: inset 0px 1px 0px 0px #97c4fe;
+    background: linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+    background-color: #3d94f6;
+    border-radius: 6px;
+    border: 1px solid #337fed;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #1570cd;
+}
+
+#submitMovie:hover {
+    background: linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+    background-color: #1e62d0;
+}
+
+#submitMovie:active {
+    position: relative;
+    top: 1px;
+}
+
+
+#cancel {
+    box-shadow: inset 0px 1px 0px 0px #f5978e;
+    background: linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+    background-color: #f24537;
+    border-radius: 6px;
+    border: 1px solid #d02718;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #810e05;
+}
+
+#cancel:hover {
+    background: linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+    background-color: #c62d1f;
+}
+
+#cancel:active {
+    position: relative;
+    top: 1px;
 }

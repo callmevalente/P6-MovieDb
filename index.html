@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Rubik&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/style.css">
     <script src="scripts/model.js" type="text/javascript"></script>
     <title>Movie Database</title>
@@ -13,7 +16,7 @@
 <body>
     <div id="mainMovie">
         <h1>My Movie Database:</h1>
-        <button type='button' id="addButton">Add movie</button>
+        <button type='button' id="addButton">ADD MOVIE</button>
         <table id="movieList">
             <tr>
                 <th>Title</th>
@@ -82,8 +85,8 @@
                     <label for="Bluray">Bluray</label>
                     <input type="checkbox" id="DVD" name="DVD" value="DVD">
                     <label for="DVD">DVD</label>
-                    <input type="checkbox" id="Streaming" name="Streaming" value="Streaming">
-                    <label for="Streaming">Streaming</label>
+                    <input type="checkbox" id="Digital" name="Digital" value="Digital">
+                    <label for="Digital">Digital</label>
                     <p id="formatError" class="validationError"></p>
                 </div>
                 <div class="formButtons">
